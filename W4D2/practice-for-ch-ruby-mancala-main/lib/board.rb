@@ -1,10 +1,13 @@
 require "byebug"
 class Board
-  attr_accessor :cups
+  attr_accessor :cups, :name1, :name2
 
   def initialize(name1, name2)
     @cups = Array.new(14) { Array.new }
     place_stones
+    @name1 = name1
+    @name2 = name2
+    @current_player = name1
   end
 
   def place_stones
@@ -25,10 +28,27 @@ class Board
   end
 
   def make_move(start_pos, current_player_name)
+    i = start_pos
+    while !@cups[start_pos].empty?
+      i = i % 13
+      stone = @cups[start_pos].pop
+      @cups[i+1] << stone
+      i+=1
+    end
+    render
+    next_turn(i)
   end
 
   def next_turn(ending_cup_idx)
     # helper method to determine what #make_move returns
+    if @cups[ending_cup_idx].length == 1
+      return :switch
+    elsif @cups[ending_cup_idx].length > 1
+      return ending_cup_idx
+    else
+      return :prompt
+    end
+    
   end
 
   def render
@@ -51,8 +71,11 @@ class Board
 
   def winner
     return :draw if @cups[13].length == @cups[6].length
-    # return "Winner name is:#{name1}" if @cups[13].length > @cups[6].length
-    # return "Winner name is:#{name2}" if @cups[13].length < @cups[6].length
+    if @current_player == name1
+      return name1
+    else
+      return name2
+    end
   end 
 end
 
