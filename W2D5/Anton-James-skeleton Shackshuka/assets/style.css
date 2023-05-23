@@ -1,0 +1,44 @@
+header {
+    background-color: red;
+}
+
+.logo {
+    display: grid;
+    place-content: center;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 45px;
+    font-style: italic;
+    display: grid;
+    place-content: center;
+    color: orangered;
+}
+
+ul {
+    list-style: lao;
+    margin-left: 50px;
+    font-size: 18px;
+}
+
+ul.Ingredients_list {
+    list-style: upper-roman;
+    margin-left: 80px;
+}
+
+h2 {
+    margin-left: 150px;
+    font-size: 28px;
+    color: green;
+}
+
+figure {
+    display: grid;
+    place-content: center;
+}
+
+img {
+    width: 200;
+    height: 200;
+}
